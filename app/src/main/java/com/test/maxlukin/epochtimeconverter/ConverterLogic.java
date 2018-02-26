@@ -1,6 +1,7 @@
 package com.test.maxlukin.epochtimeconverter;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -10,11 +11,16 @@ import java.util.TimeZone;
  */
 
 public class ConverterLogic {
+    private static DateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-    public String convertEpochToHumanTime(long valueLeft){
-        Date date = new Date(valueLeft);
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        format.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
-        return format.format(date);
+    public static String convertUnixToHumanTime(long valueLeft){
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
+        return simpleDateFormat.format(new Date(valueLeft*1000L));
+    }
+
+    public long convertHumanToUnixTime(String valueRight) throws ParseException {
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
+        Date date = simpleDateFormat.parse(valueRight );
+        return date.getTime()/1000L;
     }
 }
