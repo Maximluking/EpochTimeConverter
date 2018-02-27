@@ -21,11 +21,12 @@ public class ConverterActivity extends AppCompatActivity {
     private long valueLeft;
     private String valueRight;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.converter);
+
+        final ConverterLogic converterLogic = new ConverterLogic();
 
         button0 = findViewById(R.id.button0);
         button1 = findViewById(R.id.button1);
@@ -147,7 +148,7 @@ public class ConverterActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         valueLeft = Long.parseLong(valueLeftField.getText().toString());
-                        valueRightField.setText(ConverterLogic.convertUnixToHumanTime(valueLeft));
+                        valueRightField.setText(converterLogic.convertUnixToHumanTime(valueLeft));
                     }
                 });
             }

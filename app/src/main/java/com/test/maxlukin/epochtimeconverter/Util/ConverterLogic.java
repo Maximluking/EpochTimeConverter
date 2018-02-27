@@ -11,15 +11,18 @@ import java.util.TimeZone;
  */
 
 public class ConverterLogic {
-    private static DateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private DateFormat simpleDateFormat;
 
-    public static String convertUnixToHumanTime(long valueLeft){
+    public ConverterLogic(){
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
+
+    }
+    public String convertUnixToHumanTime(long valueLeft){
         return simpleDateFormat.format(new Date(valueLeft*1000L));
     }
 
-    public static long convertHumanToUnixTime(String valueRight) throws ParseException {
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
+    public long convertHumanToUnixTime(String valueRight) throws ParseException {
         Date date = simpleDateFormat.parse(valueRight );
         return date.getTime()/1000L;
     }

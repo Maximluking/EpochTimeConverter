@@ -24,13 +24,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:hint="@string/UnixTime"
+                android:cursorVisible="true"
                 android:gravity="center"
-                android:textSize="25sp"
+                android:hint="@string/UnixTime"
+                android:inputType="numberDecimal"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="@string/leftEditText"
-                android:cursorVisible="true"
+                android:textSize="25sp"
                 android:visibility="visible" />
 
             <EditText
@@ -38,13 +39,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="@string/rightEditText"
-                android:hint="@string/humaneDateTime"
+                android:cursorVisible="true"
                 android:gravity="center"
-                android:textSize="25sp"
+                android:hint="@string/humaneDateTime"
+                android:inputType="text"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:cursorVisible="true"
+                android:text="@string/rightEditText"
+                android:textSize="25sp"
                 android:visibility="visible" />
         </LinearLayout>
 
