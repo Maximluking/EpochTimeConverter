@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EpochTimeConverter</string>
+    <string name="app_name">Unix/Human time converter</string>
     <string name="seven">7</string>
     <string name="UnixTime">Unix Time</string>
     <string name="leftEditText" />
@@ -17,4 +17,5 @@
     <string name="zero">0</string>
     <string name="backSpace">BackSpace</string>
     <string name="convert">CONVERT</string>
+    <string name="setDataTimePicker"><![CDATA[setup data & time]]></string>
 </resources>
