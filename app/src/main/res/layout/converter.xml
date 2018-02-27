@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="8dp"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,9 +25,8 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:hint="@string/UnixTime"
-                android:inputType="text"
-                android:gravity="end"
-                android:textSize="14sp"
+                android:gravity="center"
+                android:textSize="25sp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="@string/leftEditText"
@@ -40,12 +40,11 @@
                 android:layout_weight="1"
                 android:text="@string/rightEditText"
                 android:hint="@string/humaneDateTime"
-                android:gravity="end"
-                android:textSize="14sp"
+                android:gravity="center"
+                android:textSize="25sp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:cursorVisible="true"
-                android:inputType="date|time"
                 android:visibility="visible" />
         </LinearLayout>
 
@@ -211,6 +210,7 @@
             <Button
                 android:id="@+id/buttonConvert"
                 android:text="@string/convert"
+                android:textSize="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"

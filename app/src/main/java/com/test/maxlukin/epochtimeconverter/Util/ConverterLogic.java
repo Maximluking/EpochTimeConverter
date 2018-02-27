@@ -1,4 +1,4 @@
-package com.test.maxlukin.epochtimeconverter;
+package com.test.maxlukin.epochtimeconverter.Util;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,7 +18,7 @@ public class ConverterLogic {
         return simpleDateFormat.format(new Date(valueLeft*1000L));
     }
 
-    public long convertHumanToUnixTime(String valueRight) throws ParseException {
+    public static long convertHumanToUnixTime(String valueRight) throws ParseException {
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
         Date date = simpleDateFormat.parse(valueRight );
         return date.getTime()/1000L;
