@@ -17,10 +17,8 @@
         <EditText
             android:id="@+id/valueLeftField"
             android:layout_width="250dp"
-            android:drawableBottom="@color/colorPrimaryDark"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:cursorVisible="true"
             android:gravity="center"
             android:hint="@string/UnixTime"
@@ -33,10 +31,9 @@
 
         <EditText
             android:id="@+id/valueRightField"
-            android:layout_width="match_parent"
+            android:layout_width="335dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:cursorVisible="true"
             android:gravity="center"
             android:hint="@string/humaneDateTime"
@@ -50,7 +47,7 @@
         <Button
             android:id="@+id/buttonConvert"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:paddingLeft="10dp"

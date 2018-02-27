@@ -1,4 +1,4 @@
-package com.test.maxlukin.epochtimeconverter.Util;
+package com.test.maxlukin.epochtimeconverter.Logic;
 
 import java.text.DateFormat;
 import java.text.ParseException;
