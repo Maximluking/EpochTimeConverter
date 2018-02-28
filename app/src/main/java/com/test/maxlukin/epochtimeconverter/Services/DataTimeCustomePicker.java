@@ -12,13 +12,11 @@ public class DataTimeCustomePicker {
     private TimePickerFragment timePickerFragment;
 
     public DataTimeCustomePicker() {
-
         datePickerFragment = new DatePickerFragment();
         timePickerFragment = new TimePickerFragment();
     }
 
-    public String DataTimeSet(){
+    datePicker
 
-    }
 
 }

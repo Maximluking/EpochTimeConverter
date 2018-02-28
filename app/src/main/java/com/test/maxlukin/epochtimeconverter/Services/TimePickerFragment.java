@@ -28,7 +28,7 @@ public class TimePickerFragment extends DialogFragment
 
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
+        newFragment.show(newFragment.getFragmentManager(), "timePicker");
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {

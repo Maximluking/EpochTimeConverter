@@ -28,11 +28,11 @@ public class ConverterActivity extends AppCompatActivity {
     EditText valueUnixTime, valueHumanTime;
 
     private ConverterLogic converterLogic;
-    private Calendar calendar;
-    private DatePicker datePicker;
-    private TimePicker timePicker;
-    private View dialogView;
-    private AlertDialog alertDialog;
+//    private Calendar calendar;
+//    private DatePicker datePicker;
+//    private TimePicker timePicker;
+//    private View dialogView;
+//    private AlertDialog alertDialog;
     private long value;
 
     @Override
