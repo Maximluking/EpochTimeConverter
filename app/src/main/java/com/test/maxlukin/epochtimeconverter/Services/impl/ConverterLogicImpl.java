@@ -1,4 +1,6 @@
-package com.test.maxlukin.epochtimeconverter.Logic;
+package com.test.maxlukin.epochtimeconverter.Services.impl;
+
+import com.test.maxlukin.epochtimeconverter.Services.ConverterLogic;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -10,18 +12,20 @@ import java.util.TimeZone;
  * Created by Max.Tracker.NB on 26.02.2018.
  */
 
-public class ConverterLogic {
+public class ConverterLogicImpl implements ConverterLogic {
     private DateFormat simpleDateFormat;
 
-    public ConverterLogic(){
+    public ConverterLogicImpl(){
         simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
-
     }
+
+    @Override
     public String convertUnixToHumanTime(long valueLeft){
         return simpleDateFormat.format(new Date(valueLeft*1000L));
     }
 
+    @Override
     public long convertHumanToUnixTime(String valueRight) throws ParseException {
         Date date = simpleDateFormat.parse(valueRight );
         return date.getTime()/1000L;

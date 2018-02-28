@@ -12,8 +12,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.test.maxlukin.epochtimeconverter.Logic.ConverterLogic;
+import com.test.maxlukin.epochtimeconverter.Services.ConverterLogic;
+import com.test.maxlukin.epochtimeconverter.Services.impl.ConverterLogicImpl;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -29,7 +29,6 @@ public class ConverterActivity extends AppCompatActivity {
 
     private ConverterLogic converterLogic;
     private Calendar calendar;
-    private long time;
     private DatePicker datePicker;
     private TimePicker timePicker;
     private View dialogView;
@@ -41,7 +40,7 @@ public class ConverterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.converter);
 
-        converterLogic = new ConverterLogic();
+        converterLogic = new ConverterLogicImpl();
 
         valueUnixTime = findViewById(R.id.valueLeftField);
         valueHumanTime = findViewById(R.id.valueRightField);
@@ -99,10 +98,10 @@ public class ConverterActivity extends AppCompatActivity {
                                 timePicker.getCurrentHour(),
                                 timePicker.getCurrentMinute());
 
-                        time = calendar.getTimeInMillis()/1000L;
+                        value = calendar.getTimeInMillis()/1000L;
                         alertDialog.setCancelable(true);
                         alertDialog.dismiss();
-                        valueHumanTime.setText(converterLogic.convertUnixToHumanTime(time));
+                        valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
                         buttonConvert.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -110,7 +109,7 @@ public class ConverterActivity extends AppCompatActivity {
                                     Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                valueUnixTime.setText("" + time);
+                                valueUnixTime.setText("" + value);
                                 }
                             }
                         });
