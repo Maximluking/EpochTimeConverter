@@ -25,7 +25,7 @@ public class ConverterActivity extends AppCompatActivity {
 
     Button buttonConvert, buttonClearAll;
 
-    EditText valueLeftField, valueRightField;
+    EditText valueUnixTime, valueHumanTime;
 
     private ConverterLogic converterLogic;
     private Calendar calendar;
@@ -43,21 +43,21 @@ public class ConverterActivity extends AppCompatActivity {
 
         converterLogic = new ConverterLogic();
 
-        valueLeftField = findViewById(R.id.valueLeftField);
-        valueRightField = findViewById(R.id.valueRightField);
+        valueUnixTime = findViewById(R.id.valueLeftField);
+        valueHumanTime = findViewById(R.id.valueRightField);
         buttonConvert = findViewById(R.id.buttonConvert);
         buttonClearAll = findViewById(R.id.buttonClearAll);
 
         buttonClearAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                valueLeftField.setText("");
-                valueRightField.setText("");
+                valueUnixTime.setText("");
+                valueHumanTime.setText("");
             }
         });
 
 
-        valueLeftField.setOnTouchListener(new View.OnTouchListener() {
+        valueUnixTime.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -67,11 +67,12 @@ public class ConverterActivity extends AppCompatActivity {
                 buttonConvert.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        value = Long.parseLong(valueLeftField.getText().toString());
-                        if(value == 0){
+                        if(valueUnixTime.getText().toString().isEmpty()){
                             Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
-                                    Toast.LENGTH_LONG).show();} else
-                            valueRightField.setText(converterLogic.convertUnixToHumanTime(value));
+                                    Toast.LENGTH_SHORT).show();} else {
+                            value = Long.parseLong(valueUnixTime.getText().toString());
+                            valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
+                        }
                     }
                 });
                 v.setOnTouchListener(null);
@@ -79,7 +80,7 @@ public class ConverterActivity extends AppCompatActivity {
             }
         });
 
-        valueRightField.setOnTouchListener(new View.OnTouchListener() {
+        valueHumanTime.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 dialogView = View.inflate(ConverterActivity.this, R.layout.date_time_picker, null);
@@ -101,18 +102,18 @@ public class ConverterActivity extends AppCompatActivity {
                         time = calendar.getTimeInMillis()/1000L;
                         alertDialog.setCancelable(true);
                         alertDialog.dismiss();
-                        if(time == 0){
-                            Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
-                                    Toast.LENGTH_LONG).show();} else
-                            valueRightField.setText(converterLogic.convertUnixToHumanTime(time));
-
+                        valueHumanTime.setText(converterLogic.convertUnixToHumanTime(time));
                         buttonConvert.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                valueLeftField.setText("" + time);
+                                if(valueHumanTime.getText().toString().isEmpty()) {
+                                    Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                valueUnixTime.setText("" + time);
+                                }
                             }
                         });
-
                     }});
                 alertDialog.setView(dialogView);
                 alertDialog.show();
