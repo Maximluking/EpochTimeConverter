@@ -2,7 +2,6 @@ package com.test.maxlukin.epochtimeconverter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -99,12 +98,13 @@ public class ConverterActivity extends AppCompatActivity {
                         long time = calendar.getTimeInMillis();
                         alertDialog.setCancelable(true);
                         alertDialog.dismiss();
+                        valueRightField.setText(converterLogic.convertUnixToHumanTime(calendar.getTimeInMillis()));
+                        valueLeftField.setText("" + calendar.getTimeInMillis());
                     }});
                 alertDialog.setView(dialogView);
                 alertDialog.show();
 
-//                valueRightField.setText(converterLogic.convertUnixToHumanTime(calendar.getTimeInMillis()));
-//                valueLeftField.setText("" + calendar.getTimeInMillis());
+
             }
         });
 
