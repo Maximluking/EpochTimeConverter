@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,13 +12,12 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
         tools:ignore="MissingConstraints">
-
         <EditText
             android:id="@+id/valueLeftField"
             android:layout_width="250dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:cursorVisible="true"
+            android:cursorVisible="false"
             android:gravity="center"
             android:hint="@string/UnixTime"
             android:inputType="numberDecimal"
@@ -28,16 +26,14 @@
             android:text="@string/leftEditText"
             android:textSize="30sp"
             android:visibility="visible"
-            android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"/>
-
         <EditText
             android:id="@+id/valueRightField"
             android:layout_width="335dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:cursorVisible="true"
+            android:cursorVisible="false"
             android:gravity="center"
             android:hint="@string/humaneDateTime"
             android:inputType="text"
@@ -46,10 +42,8 @@
             android:text="@string/rightEditText"
             android:textSize="30sp"
             android:visibility="visible"
-            android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"/>
-
         <Button
             android:id="@+id/buttonConvert"
             android:layout_width="wrap_content"
@@ -61,7 +55,6 @@
             android:text="@string/convert"
             android:textSize="30sp"
             android:visibility="visible" />
-
         <Button
             android:id="@+id/buttonClearAll"
             android:layout_width="wrap_content"
@@ -73,8 +66,5 @@
             android:text="@string/clearAll"
             android:textSize="15sp"
             android:visibility="visible" />
-
     </LinearLayout>
-
-
 </android.support.constraint.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -47,8 +48,6 @@ public class ConverterActivity extends AppCompatActivity {
         buttonConvert = findViewById(R.id.buttonConvert);
         buttonClearAll = findViewById(R.id.buttonClearAll);
 
-       // valueLeftField.setFocusable(true);
-
         buttonClearAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,42 +56,32 @@ public class ConverterActivity extends AppCompatActivity {
             }
         });
 
-        valueLeftField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                valueRightField.setText("");
-                if(valueLeftField.requestFocus()){
-                    InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    if (imm != null) {
-                        imm.showSoftInput(view,InputMethodManager.SHOW_IMPLICIT);
-                    }
-                }
 
+        valueLeftField.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(v,InputMethodManager.SHOW_IMPLICIT);
+                }
                 buttonConvert.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         value = Long.parseLong(valueLeftField.getText().toString());
                         if(value == 0){
                             Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
-                                Toast.LENGTH_LONG).show();} else
-                        valueRightField.setText(converterLogic.convertUnixToHumanTime(value));
+                                    Toast.LENGTH_LONG).show();} else
+                            valueRightField.setText(converterLogic.convertUnixToHumanTime(value));
                     }
                 });
+                v.setOnTouchListener(null);
+                return false;
             }
-
         });
 
-        valueRightField.setOnClickListener(new View.OnClickListener() {
+        valueRightField.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-//                valueLeftField.setText("");
-//                if(valueRightField.requestFocus()){
-//                    InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    if (imm != null) {
-//                        imm.hideSoftInputFromWindow(view, InputMethodManager.HIDE_IMPLICIT_ONLY);
-//                    }
-//                }
-
+            public boolean onTouch(View v, MotionEvent event) {
                 dialogView = View.inflate(ConverterActivity.this, R.layout.date_time_picker, null);
                 alertDialog = new AlertDialog.Builder(ConverterActivity.this).create();
 
@@ -115,7 +104,7 @@ public class ConverterActivity extends AppCompatActivity {
                         if(time == 0){
                             Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
                                     Toast.LENGTH_LONG).show();} else
-                        valueRightField.setText(converterLogic.convertUnixToHumanTime(time));
+                            valueRightField.setText(converterLogic.convertUnixToHumanTime(time));
 
                         buttonConvert.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -127,6 +116,8 @@ public class ConverterActivity extends AppCompatActivity {
                     }});
                 alertDialog.setView(dialogView);
                 alertDialog.show();
+                v.setOnTouchListener(null);
+                return false;
             }
         });
     }
