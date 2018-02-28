@@ -82,40 +82,52 @@ public class ConverterActivity extends AppCompatActivity {
         valueHumanTime.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                dialogView = View.inflate(ConverterActivity.this, R.layout.date_time_picker, null);
-                alertDialog = new AlertDialog.Builder(ConverterActivity.this).create();
-
-                dialogView.findViewById(R.id.date_time_set).setOnClickListener(new View.OnClickListener() {
+//                dialogView = View.inflate(ConverterActivity.this, R.layout.date_time_picker, null);
+//                alertDialog = new AlertDialog.Builder(ConverterActivity.this).create();
+//
+//                dialogView.findViewById(R.id.date_time_set).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//
+//                        datePicker = dialogView.findViewById(R.id.date_picker);
+//                        timePicker = dialogView.findViewById(R.id.time_picker);
+//
+//                        calendar = new GregorianCalendar(datePicker.getYear(),
+//                                datePicker.getMonth(),
+//                                datePicker.getDayOfMonth(),
+//                                timePicker.getCurrentHour(),
+//                                timePicker.getCurrentMinute());
+//
+//                        value = calendar.getTimeInMillis()/1000L;
+//                        alertDialog.setCancelable(true);
+//                        alertDialog.dismiss();
+//                        valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
+//                        buttonConvert.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                if(valueHumanTime.getText().toString().isEmpty()) {
+//                                    Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
+//                                            Toast.LENGTH_SHORT).show();
+//                                } else {
+//                                valueUnixTime.setText("" + value);
+//                                }
+//                            }
+//                        });
+//                    }});
+//                alertDialog.setView(dialogView);
+//                alertDialog.show();
+                valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
+                buttonConvert.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-
-                        datePicker = dialogView.findViewById(R.id.date_picker);
-                        timePicker = dialogView.findViewById(R.id.time_picker);
-
-                        calendar = new GregorianCalendar(datePicker.getYear(),
-                                datePicker.getMonth(),
-                                datePicker.getDayOfMonth(),
-                                timePicker.getCurrentHour(),
-                                timePicker.getCurrentMinute());
-
-                        value = calendar.getTimeInMillis()/1000L;
-                        alertDialog.setCancelable(true);
-                        alertDialog.dismiss();
-                        valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
-                        buttonConvert.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if(valueHumanTime.getText().toString().isEmpty()) {
-                                    Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
-                                            Toast.LENGTH_SHORT).show();
-                                } else {
-                                valueUnixTime.setText("" + value);
-                                }
-                            }
-                        });
-                    }});
-                alertDialog.setView(dialogView);
-                alertDialog.show();
+                    public void onClick(View v) {
+                        if(valueHumanTime.getText().toString().isEmpty()) {
+                            Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            valueUnixTime.setText("" + value);
+                        }
+                    }
+                });
                 v.setOnTouchListener(null);
                 return false;
             }
