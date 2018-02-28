@@ -1,5 +1,7 @@
 package com.test.maxlukin.epochtimeconverter.Services;
 
+import android.app.DialogFragment;
+import android.view.View;
 import android.widget.DatePicker;
 
 /**
@@ -16,7 +18,14 @@ public class DataTimeCustomePicker {
         timePickerFragment = new TimePickerFragment();
     }
 
-    datePicker
+    public void showTimePickerDialog(View v) {
+        DialogFragment timePickerFragment = new TimePickerFragment();
+        timePickerFragment.show(timePickerFragment.getFragmentManager(), "timePicker");
+    }
 
+    public void showDatePickerDialog(View v) {
+        DialogFragment datePickerFragment = new DatePickerFragment();
+        datePickerFragment.show(datePickerFragment.getFragmentManager(), "datePicker");
+    }
 
 }
