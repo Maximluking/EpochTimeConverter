@@ -19,4 +19,5 @@
     <string name="convert">CONVERT</string>
     <string name="setDataTimePicker"><![CDATA[setup data & time]]></string>
     <string name="setUpData"><![CDATA[setup data & time]]></string>
+    <string name="clearAll">clear all fields</string>
 </resources>

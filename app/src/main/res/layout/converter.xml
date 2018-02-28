@@ -27,7 +27,10 @@
             android:paddingRight="30dp"
             android:text="@string/leftEditText"
             android:textSize="30sp"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
         <EditText
             android:id="@+id/valueRightField"
@@ -42,7 +45,10 @@
             android:paddingRight="10dp"
             android:text="@string/rightEditText"
             android:textSize="30sp"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
         <Button
             android:id="@+id/buttonConvert"
@@ -54,6 +60,18 @@
             android:paddingRight="10dp"
             android:text="@string/convert"
             android:textSize="30sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/buttonClearAll"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/clearAll"
+            android:textSize="15sp"
             android:visibility="visible" />
 
     </LinearLayout>
