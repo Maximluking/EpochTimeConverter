@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.test.maxlukin.epochtimeconverter.ConverterActivity">
+    tools:context="com.test.maxlukin.epochtimeconverter.Activity.ConverterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:focusable="true"
         tools:ignore="MissingConstraints">
         <EditText
-            android:id="@+id/valueLeftField"
+            android:id="@+id/unixTime"
             android:layout_width="335dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
@@ -31,7 +31,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"/>
         <EditText
-            android:id="@+id/valueRightField"
+            android:id="@+id/humanTime"
             android:layout_width="335dp"
             android:layout_height="70dp"
             android:layout_gravity="center"

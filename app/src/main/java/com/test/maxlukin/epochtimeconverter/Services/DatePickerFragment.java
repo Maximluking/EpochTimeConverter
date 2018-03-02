@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.DatePicker;
 import java.util.Calendar;
 
@@ -12,7 +11,7 @@ import java.util.Calendar;
  * Created by Zadrotisha on 28.02.2018.
  */
 
-public class DatePickerFragment extends DialogFragment
+public static class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     @Override
@@ -26,6 +25,6 @@ public class DatePickerFragment extends DialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-
+        // Do something with the date chosen by the user
     }
 }
