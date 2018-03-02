@@ -5,13 +5,14 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
+import com.test.maxlukin.epochtimeconverter.Activity.ConverterActivity;
 import java.util.Calendar;
 
 /**
  * Created by Zadrotisha on 28.02.2018.
  */
 
-public static class DatePickerFragment extends DialogFragment
+public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     @Override
@@ -21,7 +22,7 @@ public static class DatePickerFragment extends DialogFragment
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(), this, year, month, day);
+        return new DatePickerDialog(getActivity(), (ConverterActivity)getActivity(), year, month, day);
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
