@@ -21,13 +21,13 @@ public class ConverterLogicImpl implements ConverterLogic {
     }
 
     @Override
-    public String convertUnixToHumanTime(long valueLeft){
-        return simpleDateFormat.format(new Date(valueLeft*1000L));
+    public String convertUnixToHumanTime(long unixTime){
+        return simpleDateFormat.format(new Date(unixTime*1000L));
     }
 
     @Override
-    public long convertHumanToUnixTime(String valueRight) throws ParseException {
-        Date date = simpleDateFormat.parse(valueRight );
-        return date.getTime()/1000L;
+    public String convertHumanToUnixTime(String humanTime) throws ParseException {
+        Date date = simpleDateFormat.parse(humanTime);
+        return "" + (date.getTime()/1000L);
     }
 }

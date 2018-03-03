@@ -18,6 +18,8 @@
     <string name="backSpace">BackSpace</string>
     <string name="convert">CONVERT</string>
     <string name="setDataTimePicker"><![CDATA[setup data & time]]></string>
-    <string name="setUpData"><![CDATA[setup data & time]]></string>
+    <string name="setUpTime"><![CDATA[setup data & time]]></string>
     <string name="clearAll">clear all fields</string>
+    <string name="Data">SETUP DATA</string>
+    <string name="setTime">setup time</string>
 </resources>

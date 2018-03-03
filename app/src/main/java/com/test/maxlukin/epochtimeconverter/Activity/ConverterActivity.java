@@ -1,7 +1,9 @@
 package com.test.maxlukin.epochtimeconverter.Activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import com.test.maxlukin.epochtimeconverter.R;
 import com.test.maxlukin.epochtimeconverter.Services.ConverterLogic;
 import com.test.maxlukin.epochtimeconverter.Services.impl.ConverterLogicImpl;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -26,12 +29,12 @@ public class ConverterActivity extends AppCompatActivity implements
         View.OnTouchListener, View.OnClickListener{
 
     Button buttonConvert, buttonClearAll;
-
     EditText valueUnixTime, valueHumanTime;
+    View dialogView;
+
     private Calendar calendar;
     private DatePicker datePicker;
     private TimePicker timePicker;
-    private View dialogView;
     private AlertDialog alertDialog;
     private ConverterLogic converterLogic;
     private long value;
@@ -47,6 +50,7 @@ public class ConverterActivity extends AppCompatActivity implements
         valueHumanTime = findViewById(R.id.humanTime);
         buttonConvert = findViewById(R.id.buttonConvert);
         buttonClearAll = findViewById(R.id.buttonClearAll);
+
 
         valueUnixTime.setOnTouchListener(this);
         valueHumanTime.setOnTouchListener(this);
@@ -69,40 +73,50 @@ public class ConverterActivity extends AppCompatActivity implements
 
             case R.id.humanTime:
 
-                dialogView = View.inflate(ConverterActivity.this, R.layout.date_time_picker, null);
+                dialogView = View.inflate(ConverterActivity.this, R.layout.date_picker, null);
                 alertDialog = new AlertDialog.Builder(ConverterActivity.this).create();
+                alertDialog.setCanceledOnTouchOutside(false);
 
-                dialogView.findViewById(R.id.date_time_set).setOnClickListener(new View.OnClickListener() {
+                dialogView.findViewById(R.id.date_set).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
                         datePicker = dialogView.findViewById(R.id.date_picker);
-                        timePicker = dialogView.findViewById(R.id.time_picker);
 
-                        calendar = new GregorianCalendar(datePicker.getYear(),
-                                datePicker.getMonth(),
-                                datePicker.getDayOfMonth(),
-                                timePicker.getCurrentHour(),
-                                timePicker.getCurrentMinute());
+                        final int year = datePicker.getYear();
+                        final int month = datePicker.getMonth();
+                        final int day = datePicker.getDayOfMonth();
 
-                        value = calendar.getTimeInMillis()/1000L;
-                        alertDialog.setCancelable(true);
                         alertDialog.dismiss();
-                        valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
-                        buttonConvert.setOnClickListener(new View.OnClickListener() {
+
+
+                        dialogView = View.inflate(ConverterActivity.this, R.layout.time_picker, null);
+                        alertDialog = new AlertDialog.Builder(ConverterActivity.this).create();
+                        alertDialog.setCanceledOnTouchOutside(false);
+
+                        dialogView.findViewById(R.id.time_set).setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                if(valueHumanTime.getText().toString().isEmpty()) {
-                                    Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
-                                            Toast.LENGTH_SHORT).show();
-                                } else {
-                                valueUnixTime.setText("" + value);
-                                }
+                                timePicker = dialogView.findViewById(R.id.time_picker);
+                                calendar = new GregorianCalendar(year,
+                                        month,
+                                        day,
+                                        timePicker.getCurrentHour(),
+                                        timePicker.getCurrentMinute());
+
+                                value = calendar.getTimeInMillis()/1000L;
+                                alertDialog.dismiss();
+                                valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
                             }
                         });
+                        alertDialog.setView(dialogView);
+                        alertDialog.show();
                     }});
                 alertDialog.setView(dialogView);
                 alertDialog.show();
+                v.setOnTouchListener(null);
+                break;
+            default:
                 v.setOnTouchListener(null);
                 break;
         }
@@ -125,7 +139,11 @@ public class ConverterActivity extends AppCompatActivity implements
                     value = Long.parseLong(valueUnixTime.getText().toString());
                     valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
                 } else if((valueUnixTime.getText().toString().isEmpty())&&(valueHumanTime.isFocused())&&(!valueHumanTime.getText().toString().isEmpty())){
-
+                    try {
+                        valueUnixTime.setText(converterLogic.convertHumanToUnixTime(valueHumanTime.getText().toString()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
                             Toast.LENGTH_SHORT).show();

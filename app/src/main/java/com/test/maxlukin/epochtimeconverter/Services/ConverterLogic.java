@@ -10,6 +10,6 @@ public interface ConverterLogic {
 
     String convertUnixToHumanTime(long valueLeft);
 
-    long convertHumanToUnixTime(String valueRight) throws ParseException;
+    String convertHumanToUnixTime(String valueRight) throws ParseException;
 
 }
