@@ -1,13 +1,11 @@
 package com.test.maxlukin.epochtimeconverter.Activity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,7 +24,7 @@ import java.util.GregorianCalendar;
  */
 
 public class ConverterActivity extends AppCompatActivity implements
-        View.OnTouchListener, View.OnClickListener{
+        View.OnClickListener{
 
     Button buttonConvert, buttonClearAll;
     EditText valueUnixTime, valueHumanTime;
@@ -52,30 +50,58 @@ public class ConverterActivity extends AppCompatActivity implements
         buttonClearAll = findViewById(R.id.buttonClearAll);
 
 
-        valueUnixTime.setOnTouchListener(this);
-        valueHumanTime.setOnTouchListener(this);
+        valueUnixTime.setOnClickListener(this);
+        valueHumanTime.setOnClickListener(this);
         buttonClearAll.setOnClickListener(this);
         buttonConvert.setOnClickListener(this);
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public void onClick(View v) {
         switch (v.getId()){
+
+            case R.id.buttonClearAll:
+
+                valueUnixTime.setText("");
+                valueHumanTime.setText("");
+                break;
+
+            case R.id.buttonConvert:
+
+                if((valueHumanTime.getText().toString().isEmpty())&&(!valueUnixTime.getText().toString().isEmpty())&&(valueUnixTime.isFocused())){
+                    value = Long.parseLong(valueUnixTime.getText().toString());
+                    valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
+                } else if((valueUnixTime.getText().toString().isEmpty())&&(valueHumanTime.isFocused())&&(!valueHumanTime.getText().toString().isEmpty())){
+                    try {
+                        valueUnixTime.setText(converterLogic.convertHumanToUnixTime(valueHumanTime.getText().toString()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
 
             case R.id.unixTime:
 
-                InputMethodManager imm =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.showSoftInput(v,InputMethodManager.SHOW_IMPLICIT);
+                InputMethodManager inputManagerUnixTime =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (inputManagerUnixTime != null) {
+                    inputManagerUnixTime.showSoftInput(v,InputMethodManager.SHOW_IMPLICIT);
                 }
-                v.setOnTouchListener(null);
                 break;
 
             case R.id.humanTime:
 
+
+                InputMethodManager inputManagerHumanTime =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (inputManagerHumanTime != null) {
+                    inputManagerHumanTime.hideSoftInputFromInputMethod(valueHumanTime.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
                 dialogView = View.inflate(ConverterActivity.this, R.layout.date_picker, null);
                 alertDialog = new AlertDialog.Builder(ConverterActivity.this).create();
                 alertDialog.setCanceledOnTouchOutside(false);
+
 
                 dialogView.findViewById(R.id.date_set).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -114,40 +140,8 @@ public class ConverterActivity extends AppCompatActivity implements
                     }});
                 alertDialog.setView(dialogView);
                 alertDialog.show();
-                v.setOnTouchListener(null);
                 break;
             default:
-                v.setOnTouchListener(null);
-                break;
-        }
-        return false;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-
-            case R.id.buttonClearAll:
-
-                valueUnixTime.setText("");
-                valueHumanTime.setText("");
-                break;
-
-            case R.id.buttonConvert:
-
-                if((valueHumanTime.getText().toString().isEmpty())&&(!valueUnixTime.getText().toString().isEmpty())&&(valueUnixTime.isFocused())){
-                    value = Long.parseLong(valueUnixTime.getText().toString());
-                    valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
-                } else if((valueUnixTime.getText().toString().isEmpty())&&(valueHumanTime.isFocused())&&(!valueHumanTime.getText().toString().isEmpty())){
-                    try {
-                        valueUnixTime.setText(converterLogic.convertHumanToUnixTime(valueHumanTime.getText().toString()));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    Toast.makeText(ConverterActivity.this, "Please, enter your time to convert!",
-                            Toast.LENGTH_SHORT).show();
-                }
                 break;
         }
     }
