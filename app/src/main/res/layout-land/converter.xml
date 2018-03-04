@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.test.maxlukin.epochtimeconverter.Activity.ConverterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="3"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/unixTime"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="start"
+                android:cursorVisible="false"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/UnixTime"
+                android:inputType="numberDecimal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/leftEditText"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="30sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/humanTime"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:focusable="false"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/humaneDateTime"
+                android:inputType="none"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/rightEditText"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="30sp"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/buttonConvert"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/convert"
+                android:textSize="20sp"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/buttonClearAll"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/clearAll"
+                android:textSize="15sp"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
