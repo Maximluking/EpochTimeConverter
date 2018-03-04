@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import com.test.maxlukin.epochtimeconverter.R;
@@ -27,7 +27,8 @@ public class ConverterActivity extends AppCompatActivity implements
         View.OnClickListener{
 
     Button buttonConvert, buttonClearAll;
-    EditText valueUnixTime, valueHumanTime;
+    EditText valueUnixTime;
+    TextView valueHumanTime;
     View dialogView;
 
     private Calendar calendar;
@@ -68,10 +69,10 @@ public class ConverterActivity extends AppCompatActivity implements
 
             case R.id.buttonConvert:
 
-                if((valueHumanTime.getText().toString().isEmpty())&&(!valueUnixTime.getText().toString().isEmpty())&&(valueUnixTime.isFocused())){
+                if((valueHumanTime.getText().toString().isEmpty())&&(!valueUnixTime.getText().toString().isEmpty())){
                     value = Long.parseLong(valueUnixTime.getText().toString());
                     valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
-                } else if((valueUnixTime.getText().toString().isEmpty())&&(valueHumanTime.isFocused())&&(!valueHumanTime.getText().toString().isEmpty())){
+                } else if((valueUnixTime.getText().toString().isEmpty())&&(!valueHumanTime.getText().toString().isEmpty())){
                     try {
                         valueUnixTime.setText(converterLogic.convertHumanToUnixTime(valueHumanTime.getText().toString()));
                     } catch (ParseException e) {
@@ -93,7 +94,7 @@ public class ConverterActivity extends AppCompatActivity implements
 
             case R.id.humanTime:
 
-
+                valueUnixTime.clearFocus();
                 InputMethodManager inputManagerHumanTime =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (inputManagerHumanTime != null) {
                     inputManagerHumanTime.hideSoftInputFromInputMethod(valueHumanTime.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
