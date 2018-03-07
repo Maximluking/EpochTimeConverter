@@ -12,9 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 import com.test.maxlukin.epochtimeconverter.R;
 import com.test.maxlukin.epochtimeconverter.Services.ConverterLogic;
 import com.test.maxlukin.epochtimeconverter.Services.impl.ConverterLogicImpl;
+
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -24,11 +26,11 @@ import java.util.GregorianCalendar;
  */
 
 public class ConverterActivity extends AppCompatActivity implements
-        View.OnClickListener{
+        View.OnClickListener {
 
     Button buttonConvert, buttonClearAll;
-    EditText valueUnixTime;
-    TextView valueHumanTime;
+    EditText unixTimeActivity;
+    TextView humanTimeActivity;
     View dialogView;
 
     private Calendar calendar;
@@ -36,7 +38,7 @@ public class ConverterActivity extends AppCompatActivity implements
     private TimePicker timePicker;
     private AlertDialog alertDialog;
     private ConverterLogic converterLogic;
-    private long value;
+    private long unixTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,36 +47,36 @@ public class ConverterActivity extends AppCompatActivity implements
 
         converterLogic = new ConverterLogicImpl();
 
-        valueUnixTime = findViewById(R.id.unixTime);
-        valueHumanTime = findViewById(R.id.humanTime);
+        unixTimeActivity = findViewById(R.id.unixTime);
+        humanTimeActivity = findViewById(R.id.humanTime);
         buttonConvert = findViewById(R.id.buttonConvert);
         buttonClearAll = findViewById(R.id.buttonClearAll);
 
 
-        valueUnixTime.setOnClickListener(this);
-        valueHumanTime.setOnClickListener(this);
+        unixTimeActivity.setOnClickListener(this);
+        humanTimeActivity.setOnClickListener(this);
         buttonClearAll.setOnClickListener(this);
         buttonConvert.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.buttonClearAll:
 
-                valueUnixTime.setText("");
-                valueHumanTime.setText("");
+                unixTimeActivity.setText("");
+                humanTimeActivity.setText("");
                 break;
 
             case R.id.buttonConvert:
 
-                if((valueHumanTime.getText().toString().isEmpty())&&(!valueUnixTime.getText().toString().isEmpty())){
-                    value = Long.parseLong(valueUnixTime.getText().toString());
-                    valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
-                } else if((valueUnixTime.getText().toString().isEmpty())&&(!valueHumanTime.getText().toString().isEmpty())){
+                if ((humanTimeActivity.getText().toString().isEmpty()) && (!unixTimeActivity.getText().toString().isEmpty())) {
+                    unixTime = Long.parseLong(unixTimeActivity.getText().toString());
+                    humanTimeActivity.setText(converterLogic.convertUnixToHumanTime(unixTime));
+                } else if ((unixTimeActivity.getText().toString().isEmpty()) && (!humanTimeActivity.getText().toString().isEmpty())) {
                     try {
-                        valueUnixTime.setText(converterLogic.convertHumanToUnixTime(valueHumanTime.getText().toString()));
+                        unixTimeActivity.setText(converterLogic.convertHumanToUnixTime(humanTimeActivity.getText().toString()));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -86,18 +88,18 @@ public class ConverterActivity extends AppCompatActivity implements
 
             case R.id.unixTime:
 
-                InputMethodManager inputManagerUnixTime =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager inputManagerUnixTime = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (inputManagerUnixTime != null) {
-                    inputManagerUnixTime.showSoftInput(v,InputMethodManager.SHOW_IMPLICIT);
+                    inputManagerUnixTime.showSoftInput(v, InputMethodManager.SHOW_IMPLICIT);
                 }
                 break;
 
             case R.id.humanTime:
 
-                valueUnixTime.clearFocus();
-                InputMethodManager inputManagerHumanTime =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                unixTimeActivity.clearFocus();
+                InputMethodManager inputManagerHumanTime = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (inputManagerHumanTime != null) {
-                    inputManagerHumanTime.hideSoftInputFromInputMethod(valueHumanTime.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    inputManagerHumanTime.hideSoftInputFromInputMethod(humanTimeActivity.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
                 dialogView = View.inflate(ConverterActivity.this, R.layout.date_picker, null);
                 alertDialog = new AlertDialog.Builder(ConverterActivity.this).create();
@@ -131,14 +133,15 @@ public class ConverterActivity extends AppCompatActivity implements
                                         timePicker.getCurrentHour(),
                                         timePicker.getCurrentMinute());
 
-                                value = calendar.getTimeInMillis()/1000L;
+                                unixTime = calendar.getTimeInMillis() / 1000L;
                                 alertDialog.dismiss();
-                                valueHumanTime.setText(converterLogic.convertUnixToHumanTime(value));
+                                humanTimeActivity.setText(converterLogic.convertUnixToHumanTime(unixTime));
                             }
                         });
                         alertDialog.setView(dialogView);
                         alertDialog.show();
-                    }});
+                    }
+                });
                 alertDialog.setView(dialogView);
                 alertDialog.show();
                 break;

@@ -8,8 +8,8 @@ import java.text.ParseException;
 
 public interface ConverterLogic {
 
-    String convertUnixToHumanTime(long valueLeft);
+    String convertUnixToHumanTime(long unixTime);
 
-    String convertHumanToUnixTime(String valueRight) throws ParseException;
+    String convertHumanToUnixTime(String humanTime) throws ParseException;
 
 }

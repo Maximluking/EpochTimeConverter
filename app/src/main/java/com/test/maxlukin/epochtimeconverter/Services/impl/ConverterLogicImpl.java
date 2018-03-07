@@ -15,19 +15,20 @@ import java.util.TimeZone;
 public class ConverterLogicImpl implements ConverterLogic {
     private DateFormat simpleDateFormat;
 
-    public ConverterLogicImpl(){
+    public ConverterLogicImpl() {
         simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Helsinki"));
     }
 
     @Override
-    public String convertUnixToHumanTime(long unixTime){
-        return simpleDateFormat.format(new Date(unixTime*1000L));
+    public String convertUnixToHumanTime(long unixTime) {
+        return simpleDateFormat.format(new Date(unixTime * 1000L));
     }
 
     @Override
     public String convertHumanToUnixTime(String humanTime) throws ParseException {
         Date date = simpleDateFormat.parse(humanTime);
-        return "" + (date.getTime()/1000L);
+        Long l = date.getTime() / 1000L;
+        return l.toString();
     }
 }
